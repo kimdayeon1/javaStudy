@@ -44,6 +44,13 @@ public class MathExam {
         }
         return sum/ numbers.length;
     }
+
+    public int exam120820(int age) throws Exception {
+        if (age <= 0 || age > 120) {
+            throw new Exception("Invalid age");
+        }
+        return 2023 - age;
+    }
 }
 
 

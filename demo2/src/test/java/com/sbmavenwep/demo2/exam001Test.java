@@ -2,13 +2,13 @@ package com.sbmavenwep.demo2;
 
 import com.sbmavenwep.demo2.mathexam.MathExam;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class exam001Test {
     @Test
-    public void subtract001() throws Exception{
+    public void subtract001() throws Exception {
         // Given 테스트하기 위한 준비 동작
         MathExam math = new MathExam();
 //        int num1 = -50001;
@@ -51,7 +51,7 @@ public class exam001Test {
     }
 
     @Test
-    public void  comp001() throws Exception {
+    public void comp001() throws Exception {
         // Given 테스트하기 위한 준비 동작
         MathExam math = new MathExam();
         // When
@@ -64,28 +64,39 @@ public class exam001Test {
         assertThatThrownBy(() -> math.mathTest004(10, 10001))
                 .isInstanceOf(Exception.class);
     }
+
     @Test
     public void exam120817() throws Exception {
-        MathExam math=new MathExam();
-        int [] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        MathExam math = new MathExam();
+        int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         assertThat(5.5).isEqualTo(math.exam120817(numbers));
-        assertThat(94.0).isEqualTo(math.exam120817(new int[]{89,90,91,92,93,94,95,96,97,98,99}));
+        assertThat(94.0).isEqualTo(math.exam120817(new int[]{89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99}));
         assertThatThrownBy(() -> math.exam120817(new int[]{0, 1000, 2000}))
                 .isInstanceOf(Exception.class);
-        Throwable exception = assertThrows(Exception.class, ()->{
+        Throwable exception = assertThrows(Exception.class, () -> {
             math.exam120817(new int[]{0, 1000, 2000});
         });
         System.out.println(exception.toString());
         assertThatThrownBy(() -> math.exam120817(new int[]{0, 1000, 2000}))
                 .isInstanceOf(Exception.class);
-        exception=assertThrows(Exception.class,()->math.exam120817(new int[] {}));
+        exception = assertThrows(Exception.class, () -> math.exam120817(new int[]{}));
         System.out.println(exception.toString());
-        }
     }
 
+    @Test
+    public void exam120820() throws Exception {
+        System.out.println("exam120820");
+        MathExam math = new MathExam();
 
+        // Test valid ages
+        assertThat(math.exam120820(40)).isEqualTo(1983);
+        assertThat(math.exam120820(23)).isEqualTo(2000);
 
+        // Test invalid ages
+        Throwable ex = assertThrows(Exception.class, () -> math.exam120820(0));
+        System.out.println(ex.toString());
 
-
-
-
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120820(121));
+        System.out.println(ex1.toString());
+    }
+}

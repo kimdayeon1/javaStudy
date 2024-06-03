@@ -58,7 +58,7 @@ public class exam001Test {
         // Then
         assertThat(math.mathTest004(2, 3)).isEqualTo(-1);
         assertThat(math.mathTest004(11, 11)).isEqualTo(1);
-        assertThat(math.mathTest004(7, 99)).isEqualTo(1);
+        assertThat(math.mathTest004(7, 99)).isEqualTo(-1);
         assertThatThrownBy(() -> math.mathTest004(-1, 10))
                 .isInstanceOf(Exception.class);
         assertThatThrownBy(() -> math.mathTest004(10, 10001))

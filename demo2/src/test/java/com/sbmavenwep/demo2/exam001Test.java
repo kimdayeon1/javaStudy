@@ -99,4 +99,23 @@ public class exam001Test {
         Throwable ex1 = assertThrows(Exception.class, () -> math.exam120820(121));
         System.out.println(ex1.toString());
     }
+
+    @Test
+    public void exam120829() throws Exception {
+        MathExam math = new MathExam();
+
+        assertThat(math.exam120829(70)).isEqualTo(1);
+        assertThat(math.exam120829(91)).isEqualTo(3);
+        assertThat(math.exam120829(180)).isEqualTo(4);
+
+        Exception ex1 = assertThrows(Exception.class, () -> math.exam120829(0));
+        assertThat(ex1.getMessage()).isEqualTo("각도는 1부터 179 사이어야 합니다.");
+    }
 }
+
+
+
+
+
+
+

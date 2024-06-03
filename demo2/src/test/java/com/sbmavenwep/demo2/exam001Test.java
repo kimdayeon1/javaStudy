@@ -111,6 +111,19 @@ public class exam001Test {
         Exception ex1 = assertThrows(Exception.class, () -> math.exam120829(0));
         assertThat(ex1.getMessage()).isEqualTo("각도는 1부터 179 사이어야 합니다.");
     }
+
+    @Test
+    public void exam120833() throws Exception {
+        MathExam math = new MathExam();
+
+        assertThat(math.exam120833(10)).isEqualTo(30);
+        assertThat(math.exam120833(4)).isEqualTo(6);
+
+        Exception ex1 = assertThrows(Exception.class, () -> math.exam120833(0));
+        assertThat(ex1.getMessage()).isEqualTo("[0] 값은 0~1000 사이여야 합니다.");
+        Exception ex2 = assertThrows(Exception.class, () -> math.exam120833(1001));
+        assertThat(ex2.getMessage()).isEqualTo("[1001] 값은 0~1000 사이여야 합니다.");
+    }
 }
 
 

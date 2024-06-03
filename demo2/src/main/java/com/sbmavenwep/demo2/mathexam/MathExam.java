@@ -69,7 +69,24 @@ public class MathExam {
             return 4;
         }
     }
+
+
+    public int exam120833(int n) throws Exception {
+        if (n <= 0 || n > 1000) {
+            throw new Exception(String.format("[%d] 값은 0~1000 사이여야 합니다.", n));
+        }
+
+        int sum = 0;
+        for (int i = 2; i <= n; i += 2) {
+            sum += i;
+        }
+        return sum;
+    }
 }
+
+
+
+
 
 
 

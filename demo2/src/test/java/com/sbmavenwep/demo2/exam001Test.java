@@ -124,7 +124,23 @@ public class exam001Test {
         Exception ex2 = assertThrows(Exception.class, () -> math.exam120833(1001));
         assertThat(ex2.getMessage()).isEqualTo("[1001] 값은 0~1000 사이여야 합니다.");
     }
-}
+
+    @Test
+    public void exam120885() throws Exception {
+        System.out.println("exam120885");
+        MathExam math = new MathExam();
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120885(new int[] {} , 150));
+        System.out.println(ex1.toString());
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120885(new int[] {150,201} , 130));
+        System.out.println(ex2.toString());
+        Throwable ex3 = assertThrows(Exception.class, () -> math.exam120885(new int[] {150,180} , 201));
+        System.out.println(ex3.toString());
+
+        assertThat(math.exam120885(new int[] {149, 180, 192, 170}, 167)).isEqualTo(3);
+        assertThat(math.exam120885(new int[] {180, 120, 140}, 190)).isEqualTo(0);
+    }
+
+    }
 
 
 

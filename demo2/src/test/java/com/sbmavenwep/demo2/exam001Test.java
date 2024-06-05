@@ -1,6 +1,6 @@
 package com.sbmavenwep.demo2;
 
-import com.sbmavenwep.demo2.mathexam.MathExam;
+/*import com.sbmavenwep.demo2.mathexam.MathExam;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
@@ -129,15 +129,15 @@ public class exam001Test {
     public void exam120885() throws Exception {
         System.out.println("exam120885");
         MathExam math = new MathExam();
-        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120885(new int[] {} , 150));
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120885(new int[]{}, 150));
         System.out.println(ex1.toString());
-        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120885(new int[] {150,201} , 130));
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120885(new int[]{150, 201}, 130));
         System.out.println(ex2.toString());
-        Throwable ex3 = assertThrows(Exception.class, () -> math.exam120885(new int[] {150,180} , 201));
+        Throwable ex3 = assertThrows(Exception.class, () -> math.exam120885(new int[]{150, 180}, 201));
         System.out.println(ex3.toString());
 
-        assertThat(math.exam120885(new int[] {149, 180, 192, 170}, 167)).isEqualTo(3);
-        assertThat(math.exam120885(new int[] {180, 120, 140}, 190)).isEqualTo(0);
+        assertThat(math.exam120885(new int[]{149, 180, 192, 170}, 167)).isEqualTo(3);
+        assertThat(math.exam120885(new int[]{180, 120, 140}, 190)).isEqualTo(0);
     }
 
     @Test
@@ -153,7 +153,229 @@ public class exam001Test {
         assertThat(math.exam120818(150000)).isEqualTo(142500);
         assertThat(math.exam120818(580000)).isEqualTo(464000);
     }
+
+    @Test
+    public void exam120837() throws Exception {
+        System.out.println("exam120837");
+        MathExam math = new MathExam();
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120837(-1));
+        System.out.println(ex1.toString());
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120837(1001));
+        System.out.println(ex2.toString());
+
+        assertThat(math.exam120837(23)).isEqualTo(5);
+        assertThat(math.exam120837(24)).isEqualTo(6);
+        assertThat(math.exam120837(999)).isEqualTo(201);
     }
+
+    @Test
+    public void exam120839() throws Exception {
+        System.out.println("exam120839");
+        MathExam math = new MathExam();
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120839(null));
+        System.out.println(ex1.toString());
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120839(""));
+        System.out.println(ex2.toString());
+        Throwable ex3 = assertThrows(Exception.class, () -> math.exam120839("026"));
+        System.out.println(ex3.toString());
+
+        assertThat(math.exam120839("2")).isEqualTo("0");
+        assertThat(math.exam120839("205")).isEqualTo("052");
+    }
+
+    @Test
+    public void exam120824() throws Exception {
+        System.out.println("exam120824");
+        MathExam math = new MathExam();
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120824(null));
+        System.out.println(ex1.toString());
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120824(new int[]{-1}));
+        System.out.println(ex2.toString());
+        Throwable ex3 = assertThrows(Exception.class, () -> math.exam120824(new int[]{1001}));
+        System.out.println(ex3.toString());
+
+        assertThat(math.exam120824(new int[]{1, 2, 3, 4, 5})).isEqualTo(new int[]{2, 3});
+        assertThat(math.exam120824(new int[]{1, 3, 5, 7})).isEqualTo(new int[]{0, 4});
+    }
+
+    @Test
+    public void exam120899() throws Exception {
+        System.out.println("exam120899");
+        MathExam math = new MathExam();
+
+        Throwable ex1 = assertThrows(Exception.class, () -> math.exam120899(new int[]{1001}));
+        System.out.println(ex1.toString());
+        Throwable ex2 = assertThrows(Exception.class, () -> math.exam120899(new int[]{2, 3, 2}));
+        System.out.println(ex2.toString());
+        //assertThat(math.exam120824(new int[]{1, 8, 3})).isEqualTo(new int[]{8, 1});
+        assertThat(math.exam120824(new int[]{9, 10, 11, 8})).isEqualTo(new int[]{11, 2});
+
+    }
+    @Test
+    public void numberPrint() throws Exception {
+        int x = 0b1011,y = 0206, z = 0x2A0F;
+        char a = 'A', b = 'B', c ='C';
+
+        System.out.println(String.format("10진수: x=%d, y=%d, z=%d", x, y, z));
+        System.out.println(String.format("8진수: x=%o, y=%o, z=%o", x, y, z));
+        System.out.println(String.format("16진수: x=%x, y=%x, z=%x", x, y, z));
+        System.out.println(String.format("Char: x=%c, y=%c, z=%c", x, y, z));
+
+        System.out.println(String.format("10진수: a=%d, b=%d, c=%d", (int)a, (int)b, (int)c));
+        System.out.println(String.format("8진수: a=%o, b=%o, c=%o", (int)a, (int)b, (int)c));
+        System.out.println(String.format("16진수: a=%x, b=%x, c=%x", (int)a, (int)b, (int)c));
+        System.out.println(String.format("Char: a=%c, b=%c, c=%c", (int)a, (int)b, (int)c));
+    }
+
+    public class Main {
+        public static void main(String[] args) {
+            System.out.println("special characters");
+            System.out.println("[\\n,\\\",\\\\] is very important.");
+        }
+    }*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int decimalNumber = scanner.nextInt();
+        System.out.printf("%o", decimalNumber);
+
+        scanner.close();
+    }
+}*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int decimalNumber = scanner.nextInt();
+        System.out.printf("%x", decimalNumber);
+
+        scanner.close();
+    }
+}*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int decimalNumber = scanner.nextInt();
+        System.out.printf("%X", decimalNumber);
+
+        scanner.close();
+    }
+}*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = 13;
+        n = scanf(scanner.nextLine());
+        System.out.printf("%d", n);
+        scanner.close();
+    }
+
+    public static int scanf(String input) {
+        return Integer.parseInt(input, 8);
+    }
+}*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n;
+        n = scanf(scanner.nextLine());
+        System.out.printf("%o", n);
+        scanner.close();
+    }
+
+    public static int scanf(String input) {
+        return Integer.parseInt(input, 16);
+    }
+}*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        char ch = scanner.next().charAt(0);
+        int asciiValue = (int) ch;
+        System.out.println(asciiValue);
+
+        scanner.close();
+    }
+}*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int value = scanner.nextInt();
+        char ch = (char) value;
+        System.out.println(ch);
+        scanner.close();
+    }
+}*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+        String[] dateParts = input.split("\\.");
+        int year = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]);
+        int day = Integer.parseInt(dateParts[2]);
+
+
+        System.out.printf("%04d.%02d.%02d", year, month, day);
+    }
+}*/
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+        String[] parts = input.split("-"); // "-"로 분할
+
+        String front = parts[0];
+        String back = parts[1];
+
+        System.out.println(front+back);
+    }
+}*/
+
+import java.util.Scanner;
+
+public class exam001Test {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+        String[] timeParts = input.split(":");
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+
+        System.out.printf(String.format("%d.%02d", hour, minute));
+    }
+}
+
+//}
 
 
 

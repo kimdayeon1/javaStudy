@@ -360,20 +360,44 @@ public class Main {
     }
 }*/
 
-import java.util.Scanner;
+/*import java.util.Scanner;
 
-public class exam001Test {
+public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        // 시(hour)와 분(minute)이 ":" 으로 구분되어 입력됨
         String input = scanner.nextLine();
-        String[] timeParts = input.split(":");
-        int hour = Integer.parseInt(timeParts[0]);
-        int minute = Integer.parseInt(timeParts[1]);
 
-        System.out.printf(String.format("%d.%02d", hour, minute));
+        // 입력 받은 시간을 그대로 출력
+        System.out.println(input);
     }
-}
+}*/
+
+
+
+/*import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        char[] d = new char[30];
+        String input = scanner.next();
+
+
+        for (int i = 0; i < input.length(); i++) {
+            d[i] = input.charAt(i);
+        }
+
+
+        for (int i = 0; d[i] != '\0'; i++) {
+            System.out.printf("'%c'\n", d[i]);
+        }
+    }
+}*/
+
+
 
 //}
 

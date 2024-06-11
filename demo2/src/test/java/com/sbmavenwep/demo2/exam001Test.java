@@ -1,6 +1,6 @@
 package com.sbmavenwep.demo2;
 
-/*import com.sbmavenwep.demo2.mathexam.MathExam;
+import com.sbmavenwep.demo2.mathexam.MathExam;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
@@ -211,199 +211,20 @@ public class exam001Test {
         assertThat(math.exam120824(new int[]{9, 10, 11, 8})).isEqualTo(new int[]{11, 2});
 
     }
+
     @Test
     public void numberPrint() throws Exception {
-        int x = 0b1011,y = 0206, z = 0x2A0F;
-        char a = 'A', b = 'B', c ='C';
+        int x = 0b1011, y = 0206, z = 0x2A0F;
+        char a = 'A', b = 'B', c = 'C';
 
         System.out.println(String.format("10진수: x=%d, y=%d, z=%d", x, y, z));
         System.out.println(String.format("8진수: x=%o, y=%o, z=%o", x, y, z));
         System.out.println(String.format("16진수: x=%x, y=%x, z=%x", x, y, z));
         System.out.println(String.format("Char: x=%c, y=%c, z=%c", x, y, z));
 
-        System.out.println(String.format("10진수: a=%d, b=%d, c=%d", (int)a, (int)b, (int)c));
-        System.out.println(String.format("8진수: a=%o, b=%o, c=%o", (int)a, (int)b, (int)c));
-        System.out.println(String.format("16진수: a=%x, b=%x, c=%x", (int)a, (int)b, (int)c));
-        System.out.println(String.format("Char: a=%c, b=%c, c=%c", (int)a, (int)b, (int)c));
+        System.out.println(String.format("10진수: a=%d, b=%d, c=%d", (int) a, (int) b, (int) c));
+        System.out.println(String.format("8진수: a=%o, b=%o, c=%o", (int) a, (int) b, (int) c));
+        System.out.println(String.format("16진수: a=%x, b=%x, c=%x", (int) a, (int) b, (int) c));
+        System.out.println(String.format("Char: a=%c, b=%c, c=%c", (int) a, (int) b, (int) c));
     }
-
-    public class Main {
-        public static void main(String[] args) {
-            System.out.println("special characters");
-            System.out.println("[\\n,\\\",\\\\] is very important.");
-        }
-    }*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int decimalNumber = scanner.nextInt();
-        System.out.printf("%o", decimalNumber);
-
-        scanner.close();
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int decimalNumber = scanner.nextInt();
-        System.out.printf("%x", decimalNumber);
-
-        scanner.close();
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int decimalNumber = scanner.nextInt();
-        System.out.printf("%X", decimalNumber);
-
-        scanner.close();
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = 13;
-        n = scanf(scanner.nextLine());
-        System.out.printf("%d", n);
-        scanner.close();
-    }
-
-    public static int scanf(String input) {
-        return Integer.parseInt(input, 8);
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n;
-        n = scanf(scanner.nextLine());
-        System.out.printf("%o", n);
-        scanner.close();
-    }
-
-    public static int scanf(String input) {
-        return Integer.parseInt(input, 16);
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        char ch = scanner.next().charAt(0);
-        int asciiValue = (int) ch;
-        System.out.println(asciiValue);
-
-        scanner.close();
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int value = scanner.nextInt();
-        char ch = (char) value;
-        System.out.println(ch);
-        scanner.close();
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        String input = scanner.nextLine();
-        String[] dateParts = input.split("\\.");
-        int year = Integer.parseInt(dateParts[0]);
-        int month = Integer.parseInt(dateParts[1]);
-        int day = Integer.parseInt(dateParts[2]);
-
-
-        System.out.printf("%04d.%02d.%02d", year, month, day);
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        String input = scanner.nextLine();
-        String[] parts = input.split("-"); // "-"로 분할
-
-        String front = parts[0];
-        String back = parts[1];
-
-        System.out.println(front+back);
-    }
-}*/
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // 시(hour)와 분(minute)이 ":" 으로 구분되어 입력됨
-        String input = scanner.nextLine();
-
-        // 입력 받은 시간을 그대로 출력
-        System.out.println(input);
-    }
-}*/
-
-
-
-/*import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        char[] d = new char[30];
-        String input = scanner.next();
-
-
-        for (int i = 0; i < input.length(); i++) {
-            d[i] = input.charAt(i);
-        }
-
-
-        for (int i = 0; d[i] != '\0'; i++) {
-            System.out.printf("'%c'\n", d[i]);
-        }
-    }
-}*/
-
-
-
-//}
-
-
-
-
-
-
-
+}

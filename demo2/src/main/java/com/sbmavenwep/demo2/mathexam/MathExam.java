@@ -1,6 +1,6 @@
 package com.sbmavenwep.demo2.mathexam;
 
-/*public class MathExam {
+public class MathExam {
     public int subTest001(int n1, int n2) throws Exception {
         if (n1 < -50000 || n1 > 50000) {
             throw new Exception("num1 값은 -50000보다 작거나, 50000보다 크다");
@@ -209,8 +209,7 @@ package com.sbmavenwep.demo2.mathexam;
                 if (array[i] > array[j]) {
                     result[0] = array[i];
                     result[1] = i;
-                }
-                else {
+                } else {
                     result[0] = array[j];
                     result[1] = j;
                     break;
@@ -219,9 +218,9 @@ package com.sbmavenwep.demo2.mathexam;
         }
 
         return result;
-    }*/
+    }
 
-//}
+}
 
 
 

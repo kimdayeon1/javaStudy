@@ -241,25 +241,79 @@ import java.util.Scanner;
 //    }
 //}
 
+//import java.util.ArrayList;
+//import java.util.Collections;
+//import java.util.List;
+//import java.io.*;
+//import java.util.Scanner;
+//
+//class Student implements Comparable<Student> {
+//    String name;
+//    int score;
+//
+//    public Student(String name, int score) {
+//        this.name = name;
+//        this.score = score;
+//    }
+//
+//    @Override
+//    public int compareTo(Student other) {
+//        if (this.score != other.score) {
+//            return other.score - this.score;
+//        } else {
+//            return 0;
+//        }
+//    }
+//}
+//
+//public class Main {
+//    public static void main(String[] args) throws IOException {
+//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out, "UTF-8"));
+//        Scanner scanner = new Scanner(System.in);
+//
+//        int n = scanner.nextInt();
+//        int m = scanner.nextInt();
+//        scanner.nextLine();
+//
+//        List<Student> students = new ArrayList<>();
+//
+//        for (int i = 0; i < n; i++) {
+//            String[] input = scanner.nextLine().split(" ");
+//            String name = input[0];
+//            int score = Integer.parseInt(input[1]);
+//            students.add(new Student(name, score));
+//        }
+//
+//        Collections.sort(students);
+//
+//        for (int i = 0; i < m; i++) {
+//            bw.write(students.get(i).name + "\n");
+//        }
+//        bw.flush();
+//    }
+//}
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.io.*;
 import java.util.Scanner;
 
+@AllArgsConstructor
+@Getter
+@Setter
 class Student implements Comparable<Student> {
-    String name;
-    int score;
-
-    public Student(String name, int score) {
-        this.name = name;
-        this.score = score;
-    }
+    private String name;
+    private int score;
 
     @Override
     public int compareTo(Student other) {
         if (this.score != other.score) {
-            return other.score - this.score;
+            return Integer.compare(other.score, this.score);
         } else {
             return 0;
         }
@@ -287,8 +341,9 @@ public class Main {
         Collections.sort(students);
 
         for (int i = 0; i < m; i++) {
-            bw.write(students.get(i).name + "\n");
+            bw.write(students.get(i).getName() + "\n");
         }
         bw.flush();
     }
 }
+

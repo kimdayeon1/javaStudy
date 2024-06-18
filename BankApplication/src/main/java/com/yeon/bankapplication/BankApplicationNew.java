@@ -69,9 +69,9 @@ public class BankApplicationNew {
         }
 
         if (this.accountService.deposit(bankNumber, money)) {
-            System.out.println("결과: 예금이 성공되었습니다.");
+            System.out.println("결과: 예금이 성공되었습니다");
         } else {
-            System.out.println("에러: 예금이 실패하였습니다.");
+            System.out.println("에러: 예금이 실패하였습니다");
         }
     }
 

@@ -293,57 +293,142 @@ import java.util.Scanner;
 //    }
 //}
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+//import lombok.AllArgsConstructor;
+//import lombok.Getter;
+//import lombok.Setter;
+//
+//import java.io.*;
+//import java.util.ArrayList;
+//import java.util.Collections;
+//import java.util.List;
+//import java.util.Scanner;
+//
+//@AllArgsConstructor
+//@Getter
+//@Setter
+//class Student implements Comparable<Student> {
+//    private String name;
+//    private int score;
+//
+//    @Override
+//    public int compareTo(Student other) {
+//        if (this.score != other.score) {
+//            return Integer.compare(other.score, this.score);
+//        } else {
+//            return 0;
+//        }
+//    }
+//}
+//
+//public class Main {
+//    public static void main(String[] args) throws IOException {
+//        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out, "UTF-8"));
+//        Scanner scanner = new Scanner(System.in);
+//
+//        int n = scanner.nextInt();
+//        int m = scanner.nextInt();
+//        scanner.nextLine();
+//
+//        List<Student> students = new ArrayList<>();
+//
+//        for (int i = 0; i < n; i++) {
+//            String[] input = scanner.nextLine().split(" ");
+//            String name = input[0];
+//            int score = Integer.parseInt(input[1]);
+//            students.add(new Student(name, score));
+//        }
+//
+//        Collections.sort(students);
+//
+//        for (int i = 0; i < m; i++) {
+//            bw.write(students.get(i).getName() + "\n");
+//        }
+//        bw.flush();
+//    }
+//}
+//import java.io.BufferedReader;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+//import java.text.DecimalFormat;
+//
+//public class Main {
+//
+//    public static void main(String[] args) throws IOException {
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+//
+//
+//        String input = br.readLine();
+//        // 절대값 계산 및 출력
+//        System.out.println(ABS(input));
+//
+//        br.close();
+//    }
+//
+//    public static String ABS(String input) {
+//        double value = Double.parseDouble(input);
+//        double absValue = value < 0 ? -value : value;
+//
+//        // 소수점 이하 불필요한 0 제거 후 포맷
+//        return formatDouble(absValue);
+//    }
+//
+//    public static String formatDouble(double value) {
+//        DecimalFormat df = new DecimalFormat("#.##########"); // 소수점 이하 최대 10자리까지 허용
+//        return df.format(value);
+//    }
+//}
 import java.util.Scanner;
 
-@AllArgsConstructor
-@Getter
-@Setter
-class Student implements Comparable<Student> {
-    private String name;
-    private int score;
-
-    @Override
-    public int compareTo(Student other) {
-        if (this.score != other.score) {
-            return Integer.compare(other.score, this.score);
-        } else {
-            return 0;
-        }
-    }
-}
-
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out, "UTF-8"));
+
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        scanner.close();
 
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        scanner.nextLine();
+        int selfNumberSum = getSelfNumberSum(a, b);
 
-        List<Student> students = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            String[] input = scanner.nextLine().split(" ");
-            String name = input[0];
-            int score = Integer.parseInt(input[1]);
-            students.add(new Student(name, score));
+        System.out.println(selfNumberSum);
+    }
+
+
+    public static int getSelfNumberSum(int start, int end) {
+        boolean[] isSelfNumber = new boolean[end + 1];
+        int selfNumberSum = 0;
+
+
+        for (int i = 1; i <= end; i++) {
+            isSelfNumber[i] = true;
         }
 
-        Collections.sort(students);
 
-        for (int i = 0; i < m; i++) {
-            bw.write(students.get(i).getName() + "\n");
+        for (int i = 1; i <= end; i++) {
+            int generator = getGenerator(i);
+            if (generator <= end) {
+                isSelfNumber[generator] = false; // Numbers with generators are not self-numbers
+            }
         }
-        bw.flush();
+
+
+        for (int i = start; i <= end; i++) {
+            if (isSelfNumber[i]) {
+                selfNumberSum += i;
+            }
+        }
+
+        return selfNumberSum;
+    }
+
+
+    public static int getGenerator(int n) {
+        int sum = n;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
     }
 }
 

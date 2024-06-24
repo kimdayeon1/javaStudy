@@ -11,12 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BanksystemApplicationTests {
     private AccountService accountService;
-    private BankApplicationNew bankApplication;
+    private BankApplication bankApplication;
 
     @BeforeEach
     public void setup() {
         accountService = new AccountService();
-        bankApplication = new BankApplicationNew(accountService);
+        //bankApplication = new BankApplicationNew(accountService);
     }
 
 

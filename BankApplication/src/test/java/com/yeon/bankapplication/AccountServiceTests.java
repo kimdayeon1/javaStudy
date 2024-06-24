@@ -35,4 +35,5 @@ public class AccountServiceTests {
         Account account = accountService.findAccountByNumber("111-111");
         assertEquals(5000, account.getCurrent());
     }
+
 }

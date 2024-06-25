@@ -1,13 +1,14 @@
 package com.yeon.bankapplication;
 
-
 import java.util.Scanner;
 
 public class BankApplication {
     private AccountService accountService = new AccountService();
     private AccountRepository accountRepository;
-    private AccountJSONRepository accountJsonRepository = new AccountJSONRepository();
-    private AccountFileRepository accountFileRepository = new AccountFileRepository();
+
+    public BankApplication(AccountRepository repository) {
+        this.accountRepository =  repository;
+    }
 
     private void printHeader() {
         System.out.println("=====================================");
@@ -97,7 +98,21 @@ public class BankApplication {
     }
 
     public static void main(String[] args) {
-        BankApplication bapp = new BankApplication();
+        if ( args.length < 2 ) {
+            System.out.println("Execute BankApplication -j/-t filename");
+            return;
+        }
+        String fileName = args[1];
+        AccountRepository repository;
+        if ( "-j".equals(args[0]) ) {
+            repository = new AccountJSONRepository(fileName);
+        } else if ( "-t".equals(args[0]) ) {
+            repository = new AccountFileRepository(fileName);
+        } else {
+            System.out.println("Execute BankApplication -j/-t filename");
+            return;
+        }
+        BankApplication bapp = new BankApplication(repository);
         Scanner input = new Scanner(System.in);
         boolean run = true;
 

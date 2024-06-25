@@ -3,12 +3,9 @@ package com.yeon.bankapplication;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountJSONRepositoryTests {
     @Test

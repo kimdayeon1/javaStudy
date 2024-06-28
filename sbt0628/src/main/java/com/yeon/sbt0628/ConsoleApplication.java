@@ -1,10 +1,10 @@
 package com.yeon.sbt0628;
 
 import com.yeon.sbt0628.make.PhoneBook;
-import com.yeon.sbt0628.make.PhoneBookServiceImpl;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ConsoleApplication {
     private IPhoneBookService<IPhoneBook> phoneBookService;
@@ -33,39 +33,75 @@ public class ConsoleApplication {
         this.printList(this.phoneBookService.getAllList());
     }
 
-    private EPhoneGroup getGroupFromScanner(Scanner input, String title) {
-        boolean doWhile = false;
-        EPhoneGroup eGroup = EPhoneGroup.Friends;
+    private EPhoneGroup getRequiredGroupFromScanner(Scanner input, String title) {
+        EPhoneGroup eGroup = null;
+        boolean isValidInput = false;
+
         do {
-            System.out.print(title + "연락처 그룹{Friends(1),Families(2),Schools(3),Jobs(4),Hobbies(5)} :");
+            System.out.print(title + "연락처 그룹 {Friends(1), Families(2), Schools(3), Jobs(4), Hobbies(5)}: ");
             String group = input.nextLine();
-            switch (group) {
-                case "1":
-                    eGroup = EPhoneGroup.Friends;
-                    doWhile = false;
-                    break;
-                case "2":
-                    eGroup = EPhoneGroup.valueOf("Families");
-                    doWhile = false;
-                    break;
-                case "3":
-                    eGroup = EPhoneGroup.Schools;
-                    doWhile = false;
-                    break;
-                case "4":
-                    eGroup = EPhoneGroup.Jobs;
-                    doWhile = false;
-                    break;
-                case "5":
-                    eGroup = EPhoneGroup.Hobbies;
-                    doWhile = false;
-                    break;
-                default:
-                    doWhile = true;
-                    System.out.println("Friends(1),Families(2),Schools(3),Jobs(4),Hobbies(5) 1~5사이에 입력");
-                    break;
+
+            if (group.matches("[1-5]")) {
+                switch (group) {
+                    case "1":
+                        eGroup = EPhoneGroup.Friends;
+                        break;
+                    case "2":
+                        eGroup = EPhoneGroup.Families;
+                        break;
+                    case "3":
+                        eGroup = EPhoneGroup.Schools;
+                        break;
+                    case "4":
+                        eGroup = EPhoneGroup.Jobs;
+                        break;
+                    case "5":
+                        eGroup = EPhoneGroup.Hobbies;
+                        break;
+                }
+                isValidInput = true;
+            } else {
+                System.out.println("1에서 5 사이의 숫자를 입력하세요.");
             }
-        } while (doWhile);
+        } while (!isValidInput);
+
+        return eGroup;
+    }
+
+    private EPhoneGroup getOptionalGroupFromScanner(Scanner input, String title, EPhoneGroup currentGroup) {
+        EPhoneGroup eGroup = currentGroup;
+        boolean isValidInput = false;
+
+        do {
+            System.out.print(title + "연락처 그룹 {Friends(1), Families(2), Schools(3), Jobs(4), Hobbies(5)} (기존 값 유지하려면 엔터): ");
+            String group = input.nextLine();
+
+            if (group.isEmpty()) {
+                isValidInput = true; // 사용자가 엔터를 입력한 경우 기존 값 유지
+            } else if (group.matches("[1-5]")) {
+                switch (group) {
+                    case "1":
+                        eGroup = EPhoneGroup.Friends;
+                        break;
+                    case "2":
+                        eGroup = EPhoneGroup.Families;
+                        break;
+                    case "3":
+                        eGroup = EPhoneGroup.Schools;
+                        break;
+                    case "4":
+                        eGroup = EPhoneGroup.Jobs;
+                        break;
+                    case "5":
+                        eGroup = EPhoneGroup.Hobbies;
+                        break;
+                }
+                isValidInput = true;
+            } else {
+                System.out.println("1에서 5 사이의 숫자를 입력하세요.");
+            }
+        } while (!isValidInput);
+
         return eGroup;
     }
 
@@ -73,13 +109,10 @@ public class ConsoleApplication {
         System.out.println("--------");
         System.out.println("연락처 생성");
         System.out.println("--------");
-        System.out.print("연락처 이름 :");
-        String name = input.nextLine();
-        EPhoneGroup group = this.getGroupFromScanner(input, "");
-        System.out.print("전화번호 :");
-        String phone = input.nextLine();
-        System.out.print("이메일 :");
-        String email = input.nextLine();
+        String name = getRequiredInput(input, "연락처 이름 : ");
+        EPhoneGroup group = this.getRequiredGroupFromScanner(input, "");
+        String phone = getRequiredNumericPhoneNumber(input);
+        String email = getRequiredInput(input, "이메일 : ");
 
         if (this.phoneBookService.insert(name, group, phone, email)) {
             this.phoneBookService.saveData();
@@ -87,23 +120,64 @@ public class ConsoleApplication {
         }
     }
 
+    private String getRequiredInput(Scanner input, String prompt) {
+        String value;
+        do {
+            System.out.print(prompt);
+            value = input.nextLine().trim();
+            if (value.isEmpty()) {
+                System.out.println("값을 입력하세요.");
+            }
+        } while (value.isEmpty());
+        return value;
+    }
+
+    private String getRequiredNumericPhoneNumber(Scanner input) {
+        String phone;
+        do {
+            phone = getRequiredInput(input, "전화번호 : ");
+            if (!phone.matches("[0-9]+")) {
+                System.out.println("전화번호는 숫자로만 입력해야 합니다.");
+            }
+        } while (!phone.matches("[0-9]+"));
+        return phone;
+    }
+
     public void update(Scanner input) throws Exception {
         IPhoneBook result = getFindIdConsole(input, "수정할");
         if (result == null) {
-            System.out.println("에러: ID 데이터 가 존재하지 않습니다.");
+            System.out.println("에러: ID 데이터가 존재하지 않습니다.");
             return;
         }
-        System.out.print("연락처 이름 :");
-        String name = input.nextLine();
-        EPhoneGroup group = this.getGroupFromScanner(input, "");
-        System.out.print("전화번호 :");
-        String phone = input.nextLine();
-        System.out.print("이메일 :");
-        String email = input.nextLine();
+
+        System.out.print("수정할 이름 (기존 값 유지: " + result.getName() + "): ");
+        String name = input.nextLine().trim();
+        if (name.isEmpty()) {
+            name = result.getName();
+        }
+
+        EPhoneGroup group = this.getOptionalGroupFromScanner(input, "수정할 ", result.getGroup());
+
+        System.out.print("수정할 전화번호 (기존 값 유지: " + result.getPhoneNumber() + "): ");
+        String phone = input.nextLine().trim();
+        if (phone.isEmpty()) {
+            phone = result.getPhoneNumber();
+        } else if (!phone.matches("[0-9]+")) {
+            System.out.println("전화번호는 숫자로만 입력해야 합니다.");
+            return;
+        }
+
+        System.out.print("수정할 이메일 (기존 값 유지: " + result.getEmail() + "): ");
+        String email = input.nextLine().trim();
+        if (email.isEmpty()) {
+            email = result.getEmail();
+        }
+
         IPhoneBook update = PhoneBook.builder()
                 .id(result.getId()).name(name)
                 .group(group)
                 .phoneNumber(phone).email(email).build();
+
         if (this.phoneBookService.update(update.getId(), update)) {
             this.phoneBookService.saveData();
             System.out.println("결과: 데이터 수정 성공되었습니다.");
@@ -113,7 +187,7 @@ public class ConsoleApplication {
     public void delete(Scanner input) throws Exception {
         IPhoneBook result = getFindIdConsole(input, "삭제할");
         if (result == null) {
-            System.out.println("에러: ID 데이터 가 존재하지 않습니다.");
+            System.out.println("에러: ID 데이터가 존재하지 않습니다.");
             return;
         }
         if (this.phoneBookService.remove(result.getId())) {
@@ -125,54 +199,65 @@ public class ConsoleApplication {
     }
 
     private IPhoneBook getFindIdConsole(Scanner input, String title) {
-        long l = 0L;
+        long id;
         do {
-            System.out.print(title + " ID 번호:");
-            String id = input.nextLine();
+            System.out.print(title + " ID 번호: ");
+            String idStr = input.nextLine().trim();
             try {
-                l = Long.parseLong(id);
-            } catch (Exception ex) {
+                id = Long.parseLong(idStr);
+            } catch (NumberFormatException ex) {
                 System.out.println("ID 번호를 숫자로만 입력하세요.");
+                id = -1;
             }
-        } while (l <= 0);
-        IPhoneBook iPhoneBook = (IPhoneBook) this.phoneBookService.findById(l);
-        return iPhoneBook;
+        } while (id <= 0);
+        return this.phoneBookService.findById(id);
     }
 
     private void printList(List<IPhoneBook> array) {
-        for (IPhoneBook object : array) {
-            System.out.println(object.toString());
-        }
+        array.forEach(System.out::println);
     }
 
     public void searchByName(Scanner input) {
-        System.out.print("찾을 이름 :");
-        String name = input.nextLine();
-
-        List<IPhoneBook> list = this.phoneBookService.getListFromName(name);
+        String name = getRequiredInput(input, "이름 : ");
+        List<IPhoneBook> list = this.phoneBookService.getListFromName(name)
+                .stream()
+                .filter(pb -> pb.getName().toLowerCase().contains(name.toLowerCase()))  // 한 글자만 입력해도 검색 가능
+                .collect(Collectors.toList());
         this.printList(list);
     }
 
-    public void searchByGroup(Scanner input) {
-        EPhoneGroup group = this.getGroupFromScanner(input, "찾을 ");
 
-        List<IPhoneBook> list = this.phoneBookService.getListFromGroup(group);
+    public void searchByGroup(Scanner input) {
+        EPhoneGroup group = this.getRequiredGroupFromScanner(input, "찾을 ");
+        List<IPhoneBook> list = this.phoneBookService.getListFromGroup(group)
+                .stream()
+                .filter(pb -> pb.getGroup() == group)
+                .collect(Collectors.toList());
         this.printList(list);
     }
 
     public void searchByPhone(Scanner input) {
-        System.out.print("찾을 번호 :");
-        String findPhone = input.nextLine();
-
-        List<IPhoneBook> list = this.phoneBookService.getListFromPhoneNumber(findPhone);
+        String findPhone = getRequiredNumericPhoneNumber(input);
+        List<IPhoneBook> list = this.phoneBookService.getListFromPhoneNumber(findPhone)
+                .stream()
+                .filter(pb -> pb.getPhoneNumber().startsWith(findPhone))
+                .collect(Collectors.toList());
         this.printList(list);
     }
 
     public void searchByEmail(Scanner input) {
-        System.out.print("찾을 Email :");
-        String findEmail = input.nextLine();
-
-        List<IPhoneBook> list = this.phoneBookService.getListFromEmail(findEmail);
+        String findEmail = getRequiredInput(input, " Email : ");
+        List<IPhoneBook> list = this.phoneBookService.getListFromEmail(findEmail)
+                .stream()
+                .filter(pb -> pb.getEmail().startsWith(findEmail))
+                .collect(Collectors.toList());
         this.printList(list);
+    }
+
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            System.out.println("Error: You need program arguments (-j/-t) (filename) !");
+            return;
+        }
     }
 }

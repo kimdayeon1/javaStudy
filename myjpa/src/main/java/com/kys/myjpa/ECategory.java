@@ -1,4 +1,4 @@
-package com.yeon.sbt0628.make;
+package com.kys.myjpa;
 
 public enum ECategory {
     Friends,

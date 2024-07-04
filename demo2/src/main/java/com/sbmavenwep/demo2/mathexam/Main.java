@@ -378,57 +378,196 @@ import java.util.Scanner;
 //    }
 //}
 import java.util.Scanner;
+//
+//public class Main {
+//
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        int a = scanner.nextInt();
+//        int b = scanner.nextInt();
+//        scanner.close();
+//
+//        int selfNumberSum = getSelfNumberSum(a, b);
+//
+//
+//        System.out.println(selfNumberSum);
+//    }
+//
+//
+//    public static int getSelfNumberSum(int start, int end) {
+//        boolean[] isSelfNumber = new boolean[end + 1];
+//        int selfNumberSum = 0;
+//
+//
+//        for (int i = 1; i <= end; i++) {
+//            isSelfNumber[i] = true;
+//        }
+//
+//
+//        for (int i = 1; i <= end; i++) {
+//            int generator = getGenerator(i);
+//            if (generator <= end) {
+//                isSelfNumber[generator] = false; // Numbers with generators are not self-numbers
+//            }
+//        }
+//
+//
+//        for (int i = start; i <= end; i++) {
+//            if (isSelfNumber[i]) {
+//                selfNumberSum += i;
+//            }
+//        }
+//
+//        return selfNumberSum;
+//    }
+//
+//
+//    public static int getGenerator(int n) {
+//        int sum = n;
+//        while (n > 0) {
+//            sum += n % 10;
+//            n /= 10;
+//        }
+//        return sum;
+//    }
+//}
+//
+//import java.io.BufferedWriter;
+//import java.io.OutputStreamWriter;
+//import java.io.IOException;
+//import java.util.Scanner;
+//
+//public class Main {
+//
+//    // 우박수의 길이를 계산하는 함수
+//    public static int getCollatzLength(long n) {
+//        int length = 1;
+//        while (n != 1) {
+//            if (n % 2 == 0) {
+//                n = n / 2;
+//            } else {
+//                n = 3 * n + 1;
+//            }
+//            length++;
+//        }
+//        return length;
+//    }
+//
+//    // 주어진 범위에서 가장 긴 우박수 길이와 해당 숫자를 찾는 함수
+//    public static void findLongestCollatzSequence(int a, int b, BufferedWriter bw) throws IOException {
+//        int maxLength = 0;
+//        int numberWithMaxLength = 0;
+//
+//        for (int i = a; i <= b; i++) {
+//            int length = getCollatzLength(i);
+//            if (length > maxLength) {
+//                maxLength = length;
+//                numberWithMaxLength = i;
+//            } else if (length == maxLength && i < numberWithMaxLength) {
+//                numberWithMaxLength = i;
+//            }
+//        }
+//
+//        bw.write(numberWithMaxLength + " " + maxLength);
+//        bw.newLine();
+//        bw.flush();
+//    }
+//
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//
+//        try {
+//            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out, "UTF-8"));
+//
+//            // 숫자 입력 받기
+//            int a = scanner.nextInt();
+//            int b = scanner.nextInt();
+//
+//            // 결과 찾기
+//            findLongestCollatzSequence(a, b, bw);
+//
+//            bw.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            scanner.close();
+//        }
+//    }
+//}
 
-public class Main {
+import java.util.Scanner;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int a = scanner.nextInt();
-        int b = scanner.nextInt();
-        scanner.close();
+//public class Main {
+//
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        int n = scanner.nextInt();
+//        scanner.close();
+//
+//        printTriangle(n);
+//    }
+//
+//    public static void printTriangle(int n) {
+//        if (n > 0) {
+//            printTriangle(n - 1);  // n-1 크기의 삼각형 먼저 출력
+//            System.out.println("*".repeat(n));  // n개의 별(*) 출력
+//        }
+//    }
+//}
 
-        int selfNumberSum = getSelfNumberSum(a, b);
+//import java.util.Scanner;
+//
+//public class Main {
+//    static int[] memo;
+//
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        int N = scanner.nextInt();
+//        scanner.close();
+//
+//        memo = new int[N + 1];  // 메모이제이션을 위한 배열 초기화
+//
+//        // 초기값 설정
+//        memo[1] = 1;
+//        if (N > 1) {
+//            memo[2] = 1;
+//        }
+//
+//        // N번째 피보나치 수를 구하여 출력 (결과에 10009를 나눈 나머지 출력)
+//        int result = fibonacci(N);
+//        System.out.println(result);
+//    }
+//
+//    public static int fibonacci(int n) {
+//        if (memo[n] != 0) {
+//            return memo[n];
+//        }
+//
+//        memo[n] = (fibonacci(n - 1) + fibonacci(n - 2)) % 10009;  // 메모이제이션과 나머지 연산
+//        return memo[n];
+//    }
+//}
 
-
-        System.out.println(selfNumberSum);
-    }
-
-
-    public static int getSelfNumberSum(int start, int end) {
-        boolean[] isSelfNumber = new boolean[end + 1];
-        int selfNumberSum = 0;
-
-
-        for (int i = 1; i <= end; i++) {
-            isSelfNumber[i] = true;
-        }
-
-
-        for (int i = 1; i <= end; i++) {
-            int generator = getGenerator(i);
-            if (generator <= end) {
-                isSelfNumber[generator] = false; // Numbers with generators are not self-numbers
-            }
-        }
-
-
-        for (int i = start; i <= end; i++) {
-            if (isSelfNumber[i]) {
-                selfNumberSum += i;
-            }
-        }
-
-        return selfNumberSum;
-    }
-
-
-    public static int getGenerator(int n) {
-        int sum = n;
-        while (n > 0) {
-            sum += n % 10;
-            n /= 10;
-        }
-        return sum;
-    }
-}
+//import java.util.Scanner;
+//
+//public class Main {
+//
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        int n = scanner.nextInt();
+//        scanner.close();
+//
+//        // 1부터 n까지의 합을 구하여 출력
+//        int result = sumUpToN(n);
+//        System.out.println(result);
+//    }
+//
+//    public static int sumUpToN(int n) {
+//        if (n == 1) {
+//            return 1;  // Base case: n이 1일 때 합은 1
+//        } else {
+//            return n + sumUpToN(n - 1);  // Recursive case: n + (1부터 n-1까지의 합)
+//        }
+//    }
+//}
 

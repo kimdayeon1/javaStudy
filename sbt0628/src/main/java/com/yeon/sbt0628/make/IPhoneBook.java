@@ -1,4 +1,6 @@
-package com.yeon.sbt0628;
+package com.yeon.sbt0628.make;
+
+import com.yeon.sbt0628.EPhoneGroup;
 
 public interface IPhoneBook {
     Long getId();

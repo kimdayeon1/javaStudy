@@ -1,4 +1,4 @@
-package com.yeon.sbt0628;
+package com.yeon.sbt0628.make;
 import java.util.List;
 
 public interface IPhoneBookService<T> {

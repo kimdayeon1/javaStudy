@@ -28,7 +28,7 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
 }
 
     @Override
-    public IPhoneBook insert(String name, String category, String phoneNumber, String email) throws Exception {
+    public IPhoneBook insert(String name, ECategory category, String phoneNumber, String email) throws Exception {
         PhoneBookDto phoneBook = PhoneBookDto.builder()
                 .id(0L)
                 .name(name).category(category)
@@ -36,26 +36,28 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         return this.insert(phoneBook);
     }
 
+    @Override
+    public IPhoneBook insert(IPhoneBook phoneBook) throws Exception {
+        if ( !this.isValidInsert(phoneBook) ) {
+            return null;
+        }
+
+        PhoneBookEntity entity = new PhoneBookEntity();
+        entity.copyFields(phoneBook);
+        //entity.setId(-1L);
+        IPhoneBook result = this.phoneBookJpaRepository.saveAndFlush(entity);
+        return result;
+    }
+
     private boolean isValidInsert(IPhoneBook dto) {
         if ( dto == null ) {
             return false;
         } else if ( dto.getName() == null || dto.getName().isEmpty() ) {
             return false;
-        } else if ( dto.getCategory() == null || dto.getCategory().isEmpty() ) {
+        } else if ( dto.getCategory() == null ) {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public IPhoneBook insert(IPhoneBook phoneBook) throws Exception {
-        if(!this.isValidInsert(phoneBook)){
-            return null;
-        }
-        PhoneBookEntity entity = new PhoneBookEntity();
-        entity.copyFields(phoneBook);
-        IPhoneBook result = this.phoneBookJpaRepository.saveAndFlush(entity);
-        return result;
     }
 
     @Override
@@ -102,15 +104,24 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         if (findName == null || findName.isEmpty()) {
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        List<PhoneBookEntity> list=this.phoneBookJpaRepository.findAllByNameContains(findName);
+        List<IPhoneBook> result = new ArrayList<>();
+        for(PhoneBookEntity item : list) {
+            result.add((IPhoneBook) item);
+        }
+        return result;
     }
 
     @Override
-    public List<IPhoneBook> getListFromGroup(ECategory phoneGroup) {
-        if (phoneGroup == null) {
+    public List<IPhoneBook> getListFromGroup(ECategory category) {
+        if (category == null) {
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        List<PhoneBookEntity> list = this.phoneBookJpaRepository.findAllByCategory(category);
+        List<IPhoneBook> result = list.stream()
+                .map(x -> (IPhoneBook) x)
+                .toList();
+        return result;
     }
 
     @Override
@@ -118,7 +129,11 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         if (findPhone == null || findPhone.isEmpty()) {
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        List<PhoneBookEntity> list = this.phoneBookJpaRepository.findAllByPhoneNumberContains(findPhone);
+        List<IPhoneBook> result = list.stream()
+                .map(item -> (IPhoneBook)item)
+                .toList();
+        return result;
     }
 
     @Override
@@ -126,7 +141,12 @@ public class PhoneBookServiceImpl implements IPhoneBookService<IPhoneBook> {
         if (findEmail == null || findEmail.isEmpty()) {
             return new ArrayList<>();
         }
-        return new ArrayList<>();
+        List<PhoneBookEntity> list = this.phoneBookJpaRepository.findAllByEmailContains(findEmail);
+        List<IPhoneBook> result = list.stream()
+                .map(node -> (IPhoneBook)node)
+                .collect(Collectors.toUnmodifiableList());
+
+        return result;
     }
 
 }

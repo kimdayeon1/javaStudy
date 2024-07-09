@@ -22,9 +22,4 @@ public class PhoneBookDto implements IPhoneBook {
                 , (this.category.getName() !=null) ? this.category.getName(): "null"
                 , this.phoneNumber, this.email);
     }
-
-    @Override
-    public void setCategory(ICategory category) {
-
-    }
 }

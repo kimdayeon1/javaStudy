@@ -21,7 +21,7 @@ public class PhoneBookController {
     private static Logger logger = LoggerFactory.getLogger(PhoneBookController.class);
 
     @Autowired
-    private IPhoneBookService phoneBookService;
+    private IPhoneBookService<IPhoneBook> phoneBookService;
 
     private boolean isValidInsert(IPhoneBook dto) {
         if (dto == null) {
@@ -165,8 +165,6 @@ public class PhoneBookController {
             if ( email == null || email.isEmpty() ) {
                 return ResponseEntity.badRequest().build();
             }
-            CategoryDto categoryDto = CategoryDto.builder()
-                    .id(Long.parseLong(category.toString())).build();
             List<IPhoneBook> result = this.phoneBookService.getListFromEmail(email);
             if(result == null || result.size() <= 0) {
                 return ResponseEntity.notFound().build();

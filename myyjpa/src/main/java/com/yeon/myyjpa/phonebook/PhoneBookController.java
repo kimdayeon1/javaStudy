@@ -1,5 +1,9 @@
-package com.yeon.myyjpa;
+package com.yeon.myyjpa.phonebook;
 
+import ch.qos.logback.classic.Level;
+import com.yeon.myyjpa.cat.CategoryDto;
+import com.yeon.myyjpa.cat.CategoryEntity;
+import com.yeon.myyjpa.cat.ICategory;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +40,7 @@ public class PhoneBookController {
             if (dto == null) {
                 return ResponseEntity.badRequest().build();
             }
-            IPhoneBook result = this.phoneBookService.insert(dto);
+            IPhoneBook result = (IPhoneBook) this.phoneBookService.insert(dto);
             if (result == null) {
                 return ResponseEntity.badRequest().build();
             }
@@ -78,7 +82,7 @@ public class PhoneBookController {
             if (id == null || dto == null) {
                 return ResponseEntity.badRequest().build();
             }
-            IPhoneBook result = this.phoneBookService.update(id, dto);
+            IPhoneBook result = (IPhoneBook) this.phoneBookService.update(id, dto);
             return ResponseEntity.ok(result);
         } catch (Exception ex) {
             logger.error(ex.toString());
@@ -126,7 +130,8 @@ public class PhoneBookController {
             if ( category == null ) {
                 return ResponseEntity.badRequest().build();
             }
-            List<IPhoneBook> result = this.phoneBookService.getListFromGroup(ECategory.integerOf(category));
+            CategoryEntity categoryEntity = CategoryEntity.builder().id(Long.parseLong(category.toString())).build();
+            List<IPhoneBook> result = this.phoneBookService.getListFromGroup(categoryEntity);
             if(result == null || result.size() <= 0) {
                 return ResponseEntity.notFound().build();
             }
@@ -155,11 +160,13 @@ public class PhoneBookController {
     }
 
     @GetMapping("/se/{email}")
-    public ResponseEntity<List<IPhoneBook>> findAllByEmail(@PathVariable String email) {
+    public ResponseEntity<List<IPhoneBook>> findAllByEmail(@PathVariable String email, Level category) {
         try {
             if ( email == null || email.isEmpty() ) {
                 return ResponseEntity.badRequest().build();
             }
+            CategoryDto categoryDto = CategoryDto.builder()
+                    .id(Long.parseLong(category.toString())).build();
             List<IPhoneBook> result = this.phoneBookService.getListFromEmail(email);
             if(result == null || result.size() <= 0) {
                 return ResponseEntity.notFound().build();

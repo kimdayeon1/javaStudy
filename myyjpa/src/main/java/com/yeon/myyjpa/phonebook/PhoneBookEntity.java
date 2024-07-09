@@ -1,5 +1,7 @@
-package com.yeon.myyjpa;
+package com.yeon.myyjpa.phonebook;
 
+import com.yeon.myyjpa.cat.CategoryEntity;
+import com.yeon.myyjpa.cat.ICategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -21,8 +23,9 @@ public class PhoneBookEntity implements IPhoneBook {
     private String name;
 
     @NotNull
-    @Column(length = 10)
-    private ECategory category;
+    @ManyToOne
+    @JoinColumn (name="cateory_id")
+    private CategoryEntity category;
 
     @NotNull
     @Column(length = 20)
@@ -36,5 +39,15 @@ public class PhoneBookEntity implements IPhoneBook {
     public String toString(){
         return String.format("ID:%6d, 이름:%s, 분류:%c, 번호:%s, 이메일:%s}",
                 this.id, this.name, this.category, this.phoneNumber, this.email);
+    }
+
+    @Override
+    public void setCategory(ICategory category) {
+        if (category == null) {
+            return;
+        }
+        CategoryEntity entity = new CategoryEntity();
+        entity.copyFields(category);
+        this.category = entity;
     }
 }

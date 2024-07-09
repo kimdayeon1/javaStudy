@@ -1,4 +1,6 @@
-package com.yeon.myyjpa;
+package com.yeon.myyjpa.phonebook;
+
+import com.yeon.myyjpa.cat.ICategory;
 
 import java.io.Serializable;
 
@@ -9,8 +11,8 @@ public interface IPhoneBook extends Serializable {
     String getName();
     void setName(String name);
 
-    ECategory getCategory();
-    void setCategory(ECategory category);
+    ICategory getCategory();
+    void setCategory(ICategory category);
 
     String getPhoneNumber();
     void setPhoneNumber(String phoneNumber);

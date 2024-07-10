@@ -1,4 +1,4 @@
-package com.yeon.myyjpa.cat;
+package com.yeon.myyjpa.category;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

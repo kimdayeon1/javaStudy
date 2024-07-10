@@ -1,9 +1,7 @@
 package com.yeon.myyjpa.phonebook;
 
 import ch.qos.logback.classic.Level;
-import com.yeon.myyjpa.cat.CategoryDto;
-import com.yeon.myyjpa.cat.CategoryEntity;
-import com.yeon.myyjpa.cat.ICategory;
+import com.yeon.myyjpa.category.CategoryEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

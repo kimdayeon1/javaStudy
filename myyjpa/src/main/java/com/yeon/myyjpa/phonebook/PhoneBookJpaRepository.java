@@ -1,6 +1,6 @@
 package com.yeon.myyjpa.phonebook;
 
-import com.yeon.myyjpa.cat.CategoryEntity;
+import com.yeon.myyjpa.category.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

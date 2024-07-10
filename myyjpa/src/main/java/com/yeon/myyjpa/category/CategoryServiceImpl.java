@@ -1,4 +1,4 @@
-package com.yeon.myyjpa.cat;
+package com.yeon.myyjpa.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

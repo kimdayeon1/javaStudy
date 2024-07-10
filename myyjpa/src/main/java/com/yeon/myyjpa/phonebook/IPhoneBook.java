@@ -1,6 +1,6 @@
 package com.yeon.myyjpa.phonebook;
 
-import com.yeon.myyjpa.cat.ICategory;
+import com.yeon.myyjpa.category.ICategory;
 
 import java.io.Serializable;
 

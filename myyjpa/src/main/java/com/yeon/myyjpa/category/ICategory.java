@@ -1,4 +1,4 @@
-package com.yeon.myyjpa.cat;
+package com.yeon.myyjpa.category;
 
 //import com.yeon.myyjpa.phonebook.ECategory;
 

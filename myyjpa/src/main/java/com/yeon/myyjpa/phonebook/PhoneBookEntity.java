@@ -1,7 +1,7 @@
 package com.yeon.myyjpa.phonebook;
 
-import com.yeon.myyjpa.cat.CategoryEntity;
-import com.yeon.myyjpa.cat.ICategory;
+import com.yeon.myyjpa.category.CategoryEntity;
+import com.yeon.myyjpa.category.ICategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

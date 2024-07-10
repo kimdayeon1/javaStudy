@@ -1,4 +1,4 @@
-package com.yeon.myyjpa.cat;
+package com.yeon.myyjpa.category;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

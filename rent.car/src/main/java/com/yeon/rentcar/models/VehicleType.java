@@ -4,9 +4,9 @@ public enum VehicleType {
     Sedan,
     SUV,
     Small,
-    Truck,
-    Sports,
-    Golf,
-    Zeep,
+    Sport,
+    Bus,
+    Van,
+    Jeep,
     MotorCycle
 }
